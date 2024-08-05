@@ -5,7 +5,7 @@ import { InputTransformComponent } from './components/input-transform/input-tran
 
 export interface User {
   name: string;
-  age: number;
+  age: string;
   profession: string;
   id: string;
 }
@@ -15,7 +15,7 @@ export interface User {
   standalone: true,
   imports: [CommonModule, InputTransformComponent],
   template: `
-    <app-input-transform [user]="userDatasList[0]" />
+    <app-input-transform [userAge]="userDatasList[0].age" />
     <!-- <div
       style="display: flex;justify-content: center;align-items: center;flex-direction: column; gap: 1rem;"
     >
@@ -33,10 +33,10 @@ export class AppComponent {
   renderblock = false;
   title = 'learnAngular17';
   userDatasList: Array<User> = [
-    { age: 20, name: 'Marcos', profession: 'Software Developer', id: '123' },
-    { age: 30, name: 'Marcelo', profession: 'Software Developer', id: '456' },
-    { age: 40, name: 'Carlos', profession: 'Scrum Master', id: '789' },
-    { age: 30, name: 'Maria', profession: 'UX Designer', id: '123' },
+    { age: '20', name: 'Marcos', profession: 'Software Developer', id: '123' },
+    { age: '30', name: 'Marcelo', profession: 'Software Developer', id: '456' },
+    { age: '40', name: 'Carlos', profession: 'Scrum Master', id: '789' },
+    { age: '30', name: 'Maria', profession: 'UX Designer', id: '123' },
   ];
   um = 1;
   dois = 2;

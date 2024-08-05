@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { User } from '../../app.component';
 
 function setUserNameToUpperCase(user: User): User {
@@ -12,13 +12,12 @@ function setUserNameToUpperCase(user: User): User {
   selector: 'app-input-transform',
   standalone: true,
   imports: [],
-  template: `
-    <h2>Nome: {{ user?.name }}</h2>
-    <h2>Idade: {{ user?.age }}</h2>
-    <h2>Profissao: {{ user?.profession }}</h2>
-  `,
+  template: ` <h2>Idade: {{ userAge }}</h2> `,
 })
-export class InputTransformComponent {
-  @Input({ required: true, transform: setUserNameToUpperCase })
-  public user!: User;
+export class InputTransformComponent implements OnInit {
+  ngOnInit(): void {
+    console.log(typeof this.userAge);
+  }
+  @Input({ required: true, transform: numberAttribute })
+  public userAge!: number;
 }
