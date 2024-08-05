@@ -15,7 +15,10 @@ export interface User {
   standalone: true,
   imports: [CommonModule, InputTransformComponent],
   template: `
-    <app-input-transform [userAge]="userDatasList[0].age" />
+    <app-input-transform
+      [userAge]="userDatasList[0].age"
+      [showUserAge]="showUser"
+    />
     <!-- <div
       style="display: flex;justify-content: center;align-items: center;flex-direction: column; gap: 1rem;"
     >
@@ -30,6 +33,7 @@ export interface User {
   `,
 })
 export class AppComponent {
+  showUser = 'true';
   renderblock = false;
   title = 'learnAngular17';
   userDatasList: Array<User> = [
