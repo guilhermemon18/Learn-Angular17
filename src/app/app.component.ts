@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { InputTransformComponent } from './components/input-transform/input-transform.component';
+import { of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface User {
   name: string;
@@ -32,7 +34,9 @@ export interface User {
     </div> -->
   `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  //referência para se desinscrever do observable quando o componente atual for destruído
+  destroyedRef = inject(DestroyRef);
   showUser = 'true';
   renderblock = false;
   title = 'learnAngular17';
@@ -44,6 +48,16 @@ export class AppComponent {
   ];
   um = 1;
   dois = 2;
+
+  userDatas$ = of(this.userDatasList);
+
+  ngOnInit(): void {
+    //nova forma de se desinscrever de um observable (Angular 16+)
+    this.userDatas$.pipe(takeUntilDestroyed(this.destroyedRef)).subscribe({
+      next: (response) => console.log('User Datas in observable', response),
+    });
+  }
+
   getnames(): void {
     if (this.um === this.dois) {
     } else if (this.um !== 2) {
