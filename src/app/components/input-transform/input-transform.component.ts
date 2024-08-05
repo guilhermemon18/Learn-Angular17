@@ -1,6 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../app.component';
 
+function setUserNameToUpperCase(user: User): User {
+  return {
+    ...user,
+    name: user.name.toUpperCase(),
+  };
+}
+
 @Component({
   selector: 'app-input-transform',
   standalone: true,
@@ -12,5 +19,6 @@ import { User } from '../../app.component';
   `,
 })
 export class InputTransformComponent {
-  @Input({ required: true }) public user!: User;
+  @Input({ required: true, transform: setUserNameToUpperCase })
+  public user!: User;
 }
